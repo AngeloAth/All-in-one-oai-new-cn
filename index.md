@@ -1,3 +1,4 @@
+# Installation Manual for OAI all in one
 ## Hardware
 
 Intel® Core™ i9-9900T
