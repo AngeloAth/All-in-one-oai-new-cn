@@ -1,11 +1,17 @@
 ## Hardware
 
 Intel® Core™ i9-9900T
+
 32 GB RAM
+
 USRP B210
+
 LTE Band7 Duplexer
+
 Open Cells Card Reader
+
 Open Cells Sim Cards
+
 
 ## Software
 
