@@ -352,3 +352,6 @@ sudo spgwu -oc /usr/local/etc/oai/spgw_u.conf
 sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
 
+### TROUBLESHOOTING SECTION
+
+
