@@ -322,4 +322,32 @@ sudo gedit ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.
 ```
 ### Programming Sim Card
 
+For programming the sim cards I use [UICC v1.7](https://open-cells.com/d5138782a8739209ec5760865b1e53b0/uicc-v1.7.tgz)
+Download it, extract it then run 
+
+```markdown
+sudo ./program_uicc --adm=28385289 --opc=8e27b6af0e692e750f32667a3b14605d --key=fec86ba6eb707ed08905757b1bb44b8f --spn=openairinterface --isdn=001011234561000 --imsi=208930000000002 --authenticate
+```
+
+Copy the hss sqn next value as we going to update in the the database.
+Lets say sqn is 37587.
+We use the user 208930000000002.
+
+```markdown
+cqlsh
+select imsi,key,msisdn,opc,rand,sqn from vhss.users_imsi where imsi ='208930000000002';
+UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
+```
+
+### Running HSS,MME,SPGW-C,SPGW-U and eNB
+
+In different terminals type 
+
+```markdown
+oai_hss -j /usr/local/etc/oai/hss_rel14.json
+~/openair-cn/scripts/run_mme --config-file /usr/local/etc/oai/mme.conf
+sudo spgwc -oc /usr/local/etc/oai/spgw_c.conf
+sudo spgwu -oc /usr/local/etc/oai/spgw_u.conf
+sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
+```
 
