@@ -512,7 +512,7 @@ Change the following lines in the file ~/openairinterface5g/targets/PROJECTS/GEN
 sudo gedit ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
 
-Change values at **Line 18** to match your configuration : `plmn_list = ( { mcc = 208; mnc = 93; mnc_length = 2; } );`
+Change values at **Line 18** of mcc and mnc to match your configuration : `plmn_list = ( { mcc = 208; mnc = 93; mnc_length = 2; } );`
 
 Change value at **Line 34** to : `2625000000L`
 
