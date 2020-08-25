@@ -54,7 +54,7 @@ sudo /usr/lib/uhd/utils/uhd_images_downloader.py
 
 ### HSS - Installation - Configuration
 
-- Before installing Cassandra 
+#### Before installing Cassandra 
 
 Add the public key and install OpenJRE version 8 
 
