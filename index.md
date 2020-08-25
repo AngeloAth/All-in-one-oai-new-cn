@@ -210,7 +210,7 @@ Exp. If your realm is "ng4T.com"
 sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
 ```
 - HSS Configuration (3/4) : File **hss_fd.conf**
- - Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
+`Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"``
 
 
 
