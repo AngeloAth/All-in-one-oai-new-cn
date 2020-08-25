@@ -72,14 +72,14 @@ sudo gedit ~/build_helper.cassandra
 ```
 Change link in line 64 to https://downloads.apache.org/cassandra/KEYS
 
-- Installing Cassandra
+#### Installing Cassandra
 
 ```sh
 cd ~/openair-cn/scripts/
 ./build_cassandra --check-installed-software --force
 ```
 
-- Configuring Cassandra
+#### Configuring Cassandra
 
 Set the JRE version 8 as default one
 
@@ -155,7 +155,7 @@ Exp. --mme-identity abcd.ng4T.com
 ~/openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity oai.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C 127.0.0.1
 ```
 
-- HSS Configuration (1/5) : **Prework**
+#### HSS Configuration (1/5) : **Prework**
 
 Create the folders
 
@@ -200,7 +200,7 @@ Generate the certificates
 ../src/hss_rel14/bin/make_certs.sh hss ng4T.com /usr/local/etc/oai
 oai_hss -j /usr/local/etc/oai/hss_rel14.json --onlyloadkey
 ```
-- HSS Configuration (2/5) : File **acl.conf**
+#### HSS Configuration (2/5) : File **acl.conf**
 
 Change @REALM@ with your realm 
 Exp. If your realm is "ng4T.com"
@@ -210,7 +210,7 @@ Exp. If your realm is "ng4T.com"
 ```sh
 sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
 ```
-- HSS Configuration (3/5) : File **hss_rel14_fd.conf**
+#### HSS Configuration (3/5) : File **hss_rel14_fd.conf**
 
 ```sh
 hostname --fqdn
@@ -226,7 +226,7 @@ TLS_CA = "/usr/local/etc/oai/freeDiameter/cacert.pem";`
 
 Change **Line 75** @PREFIX@ to match your oai install dir : `LoadExtension = "acl_wl.fdx" : "/usr/local/etc/oai/freeDiameter/acl.conf";`
 
-- HSS Configuration (4/5) : File **hss_rel14.conf**
+#### HSS Configuration (4/5) : File **hss_rel14.conf**
 
 
 ```sh
@@ -235,7 +235,7 @@ sudo gedit /usr/local/etc/oai/hss_rel14.conf
 
 Change **Line 24** to the cassandra server IP `cassandra_Server_IP = @cassandra_Server_IP@;`
 
-- HSS Configuration (5/5) : File **hss_rel14.json**
+#### HSS Configuration (5/5) : File **hss_rel14.json**
 
 ```sh
 sudo gedit /usr/local/etc/oai/hss_rel14.json
@@ -263,7 +263,7 @@ Change **Line 36** to `    "ossfile": "/usr/local/etc/oai/conf/oss.json"`
 
 ### MME - Installation - Configuration
 
-- Install MME
+#### Install MME
 
 ```sh
 cd ~/openair-cn/scripts
@@ -271,7 +271,7 @@ cd ~/openair-cn/scripts
 ./build_mme --clean
 ```
 
-- Create MME configuration files
+#### Create MME configuration files
 
 ```sh
 sudo openssl rand -out ~/.rnd 128
@@ -281,7 +281,7 @@ cp ../etc/mme.conf  /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai/freeDiameter/mme_fd.conf /usr/local/etc/oai/mme.conf
 ```
 
-- Configuration of MME (1/2) : File **mme.conf**
+#### Configuration of MME (1/2) : File **mme.conf**
 
 Change the following lines in the file /usr/local/etc/oai/mme.conf
 
@@ -342,7 +342,7 @@ WRR_LIST_SELECTION = (
     );
 ```
 
-- Configuration of MME (2/2) : File **mme_fd.conf**
+#### Configuration of MME (2/2) : File **mme_fd.conf**
 
 Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf
 
@@ -400,7 +400,7 @@ Exp. If your hostname fqdn is "oai"
 
 ### SPGW-C - Installation - Configuration
 
-- Install SPGW-C
+#### Install SPGW-C
 
 ```sh
 cd ~/openair-cn-cups/build/scripts
