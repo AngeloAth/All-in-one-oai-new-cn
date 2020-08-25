@@ -1,4 +1,16 @@
 # Installation Manual for OAI all in one
+
+[HSS Install](#hss-installation-configuration)
+[HSS Configure](#hss-configuration-1/5-prework)
+[MME Install](#Install-MME)
+[MME Configure)(#configuration-of-mme-1/2-file-mme.conf)
+[SPGW-C](#install-spgwc)
+
+[SPGW-U](#install-spgwc)
+[eNB](#install-enb)
+[Programming Sim](#programming-sim-card)
+[Run](#hss-mme-spgwc-spgwu-and-enb)
+[Troubleshooting](#troubleshooting)
 ## Hardware Setup
 
 Intel® Core™ i7-9700 @ 3.00GHz
@@ -552,7 +564,7 @@ select imsi,key,msisdn,opc,rand,sqn from vhss.users_imsi where imsi ='2089300000
 UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
 ```
 
-## Running HSS,MME,SPGW-C,SPGW-U and eNB
+## Running HSS, MME, SPGW-C, SPGW-U and eNB
 
 In different terminals type 
 
@@ -564,7 +576,7 @@ sudo spgwu -oc /usr/local/etc/oai/spgw_u.conf
 sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
 
-## TROUBLESHOOTING SECTION
+## TROUBLESHOOTING 
 
 ### 1. If there is a problem connecting to cassandra try the following
 ```sh
