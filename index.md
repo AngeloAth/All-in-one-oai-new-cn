@@ -21,14 +21,14 @@ Install Ubuntu [18.04](https://releases.ubuntu.com/18.04/ubuntu-18.04.5-desktop-
 
 ### Clone the core network's repositories
 
-```markdown
+```sh
 git clone https://github.com/OPENAIRINTERFACE/openair-cn.git
 git clone https://github.com/OPENAIRINTERFACE/openair-cn-cups.git
 ```
 
 ### Switch to develop branch in both directories that have been created
 
-```markdown
+```sh
 cd ~/openair-cn
 git branch
 git checkout develop
@@ -39,7 +39,7 @@ git checkout develop
 ```
 ### Install USRP B210 Drivers (Open Cells Tutorial)
 
-```markdown
+```sh
 sudo apt-get install libboost-all-dev libusb-1.0-0-dev python-mako doxygen python-docutils python-requests python3-pip cmake build-essential
 sudo pip3 install mako numpy
 git clone git://github.com/EttusResearch/uhd.git
@@ -57,7 +57,7 @@ sudo /usr/lib/uhd/utils/uhd_images_downloader.py
 
 Add the public key and install OpenJRE version 8 
 
-```markdown
+```sh
 echo "deb http://www.apache.org/dist/cassandra/debian 21x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
 curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
 sudo apt install openjdk-8-jdk openjdk-8-jre
@@ -65,7 +65,7 @@ sudo apt install openjdk-8-jdk openjdk-8-jre
 
 Change broken link of apache keys
 
-```markdown
+```sh
 cd openair-cn/build/tools
 sudo gedit ~/build_helper.cassandra
 ```
@@ -73,7 +73,7 @@ Change link in line 64 to https://downloads.apache.org/cassandra/KEYS
 
 - Installing Cassandra
 
-```markdown
+```sh
 cd ~/openair-cn/scripts/
 ./build_cassandra --check-installed-software --force
 ```
@@ -82,7 +82,7 @@ cd ~/openair-cn/scripts/
 
 Set the JRE version 8 as default one
 
-```markdown
+```sh
 sudo service cassandra stop
 update-java-alternatives -l
 sudo update-alternatives --config java
@@ -93,14 +93,14 @@ Type selection number that equals java-8-openjdk exp. here is 2 then press Enter
 
 Verify that Cassandra is properly installed and running
 
-```markdown
+```sh
 sudo service cassandra start
 nodetool status
 ```
 
 Stop Cassandra and cleanup the log files before modifying the configuration
 
-```markdown
+```sh
 sudo service cassandra stop
 sudo rm -rf /var/lib/cassandra/data/system/*
 sudo rm -rf /var/lib/cassandra/commitlog/*
@@ -110,12 +110,12 @@ sudo rm -rf /var/lib/cassandra/saved_caches/*
 
 Update the Cassandra configuration 
 
-```markdown
+```sh
 sudo gedit /etc/cassandra/cassandra.yaml
 ```
 Edit the following lines
  
-```markdown
+```sh
 - LINE 272 comment this line
 # seeds is actually a comma-delimited list of addresses.
 - LINE 273
@@ -125,24 +125,24 @@ endpoint_snitch: GossipingPropertyFileSnitch
 ```
 Verify that you can access Cassandra DB
 
-```markdown
+```sh
 cqlsh
 exit
 ```
 Create cassandra db keyspaces
 
-```markdown
+```sh
 cqlsh --file /home/oai/openair-cn/src/hss_rel14/db/oai_db.cql 127.0.0.1 
 ```
 Populate users table
 Modify the below command to suit your setup.
 Exp. If your hostname is abcd and realm is ng4T.com modify --mme-identity abcd.ng4T.com , in my case the hostname is "oai" and realm is "ng4T.com"
 
-```markdown
+```sh
 hostname --fqdn
 ```
 Then
-```markdown
+```sh
 ~/openair-cn/scripts/data_provisioning_users --apn default.ng4T.com --apn2 internet --key fec86ba6eb707ed08905757b1bb44b8f --imsi-first 208930000000002 --msisdn-first 001011234561000 --mme-identity oai.ng4T.com --no-of-users 10 --realm ng4T.com --truncate True  --verbose True --cassandra-cluster 127.0.0.1
 ```
 
@@ -150,7 +150,7 @@ Add the MME info in the database
 Again here use your hostname and realm
 Exp. --mme-identity abcd.ng4T.com
 
-```markdown
+```sh
 ~/openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity oai.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C 127.0.0.1
 ```
 
@@ -158,7 +158,7 @@ Exp. --mme-identity abcd.ng4T.com
 
 Create the folders
 
-```markdown
+```sh
 sudo mkdir -p /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai
 sudo mkdir  /usr/local/etc/oai/freeDiameter
@@ -171,7 +171,7 @@ sudo chmod 777 /usr/local/etc/oai/logs
 
 Create the freeDiameter files
 
-```markdown
+```sh
 cd ~/openair-cn/scripts
 
 sudo cp ../etc/acl.conf ../etc/hss_rel14_fd.conf /usr/local/etc/oai/freeDiameter
@@ -206,7 +206,7 @@ Exp. If your realm is "ng4T.com"
 
 `ALLOW_OLD_TLS  *.ng4T.com *.localdomain *.test3gpp.net`
 
-```markdown
+```sh
 sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
 ```
 - HSS Configuration (3/4) : File **hss_fd.conf**
