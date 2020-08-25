@@ -193,7 +193,7 @@ touch /usr/local/etc/oai/logs/hss_audit.log
 sudo chmod 777 /usr/local/etc/oai/logs/hss.log /usr/local/etc/oai/logs/hss_stat.log /usr/local/etc/oai/logs/hss_audit.log
 ```
 
-Lastly, make the certificates
+Generate the certificates
 
 ```sh
 ../src/hss_rel14/bin/make_certs.sh hss ng4T.com /usr/local/etc/oai
@@ -211,7 +211,7 @@ sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
 ```
 - HSS Configuration (3/4) : File **hss_fd.conf**
 
-..* Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
+* Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
 
 
 
