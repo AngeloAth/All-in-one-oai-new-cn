@@ -50,7 +50,10 @@ sudo make install
 sudo ldconfig
 sudo /usr/lib/uhd/utils/uhd_images_downloader.py
 ```
-### Cassandra DB - Installation - Configuration
+
+### HSS - Installation - Configuration
+
+- Before installing Cassandra 
 
 Add the public key and install OpenJRE version 8 
 
@@ -67,12 +70,15 @@ cd openair-cn/build/tools
 sudo gedit ~/build_helper.cassandra
 ```
 Change link in line 64 to https://downloads.apache.org/cassandra/KEYS
-Now build cassandra
+
+- Installing Cassandra
 
 ```markdown
 cd ~/openair-cn/scripts/
 ./build_cassandra --check-installed-software --force
 ```
+
+- Configuring Cassandra
 
 Set the JRE version 8 as default one
 
@@ -82,17 +88,13 @@ update-java-alternatives -l
 sudo update-alternatives --config java
 ```
 Type selection number that equals java-8-openjdk exp. here is 2 then press Enter
-
-Inline-style: 
+ 
 ![alt text](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/screenshots/1.cass-java-jre8.png "jdk-8")
+
+Verify that Cassandra is properly installed and running
 
 ```markdown
 sudo service cassandra start
-```
-
-Verify that Cassandra is installed and running
-
-```markdown
 nodetool status
 ```
 
@@ -134,24 +136,25 @@ cqlsh --file /home/oai/openair-cn/src/hss_rel14/db/oai_db.cql 127.0.0.1
 ```
 Populate users table
 Modify the below command to suit your setup.
-Exp. If your hostname is abcd modify --mme-identity abcd.ng4T.com , in my case the hostname is "oai"
+Exp. If your hostname is abcd and realm is ng4T.com modify --mme-identity abcd.ng4T.com , in my case the hostname is "oai" and realm is "ng4T.com"
 
 ```markdown
 hostname --fqdn
 ```
+Then
 ```markdown
 ~/openair-cn/scripts/data_provisioning_users --apn default.ng4T.com --apn2 internet --key fec86ba6eb707ed08905757b1bb44b8f --imsi-first 208930000000002 --msisdn-first 001011234561000 --mme-identity oai.ng4T.com --no-of-users 10 --realm ng4T.com --truncate True  --verbose True --cassandra-cluster 127.0.0.1
 ```
 
 Add the MME info in the database
-Again here use your hostname 
+Again here use your hostname and realm
 Exp. --mme-identity abcd.ng4T.com
 
 ```markdown
 ~/openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity oai.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C 127.0.0.1
 ```
 
-### HSS - Installation - Configuration
+- HSS Configuration (1/4) : **Prework**
 
 Create the folders
 
@@ -166,7 +169,7 @@ sudo mkdir -p /usr/local/etc/oai/logs
 sudo chmod 777 /usr/local/etc/oai/logs
 ```
 
-Create the freeDiameter folders
+Create the freeDiameter files
 
 ```markdown
 cd ~/openair-cn/scripts
@@ -183,7 +186,7 @@ sudo chmod 777 /usr/local/etc/oai/conf/oss.json
 
 Create freeDiameter log folders and files
 
-```markdown
+```sh
 touch /usr/local/etc/oai/logs/hss.log
 touch /usr/local/etc/oai/logs/hss_stat.log
 touch /usr/local/etc/oai/logs/hss_audit.log
@@ -192,14 +195,35 @@ sudo chmod 777 /usr/local/etc/oai/logs/hss.log /usr/local/etc/oai/logs/hss_stat.
 
 Lastly, make the certificates
 
-```markdown
+```sh
 ../src/hss_rel14/bin/make_certs.sh hss ng4T.com /usr/local/etc/oai
 oai_hss -j /usr/local/etc/oai/hss_rel14.json --onlyloadkey
 ```
+- HSS Configuration (2/4) : File **acl.conf**
+
+Change @REALM@ with your realm 
+Exp. If your realm is "ng4T.com"
+
+`ALLOW_OLD_TLS  *.ng4T.com *.localdomain *.test3gpp.net`
+
+```markdown
+sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
+```
+- HSS Configuration (3/4) : File **hss_fd.conf**
+
+..* Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
+
+
+
+
+
+
+
+
 
 ### MME - Installation - Configuration
 
-Install MME
+- Install MME
 
 ```markdown
 cd ~/openair-cn/scripts
@@ -207,7 +231,7 @@ cd ~/openair-cn/scripts
 ./build_mme --clean
 ```
 
-Create MME configuration files
+- Create MME configuration files
 
 ```markdown
 sudo openssl rand -out ~/.rnd 128
@@ -217,9 +241,9 @@ cp ../etc/mme.conf  /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai/freeDiameter/mme_fd.conf /usr/local/etc/oai/mme.conf
 ```
 
-Configuration of MME
+- Configuration of MME
 
-- 1. Change the following lines in the file /usr/local/etc/oai/mme.conf
+1. Change the following lines in the file /usr/local/etc/oai/mme.conf
 
 ```markdown
 REALM = "ng4T.com";
@@ -233,7 +257,7 @@ HSS_HOSTNAME = "hss";
 {ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; PEER_MME_IPV4_ADDRESS_FOR_S10="0.0.0.0/24";}
 ```
 
-- 2. Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf  %%
+2. Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf  %%
 
 ```markdown
 Identity = "oai.ng4T.com";
