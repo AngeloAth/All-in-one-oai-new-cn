@@ -575,7 +575,13 @@ Uncomment line 268
 ```sh
 systemctl restart cassandra
 ```
-### 2. If there is still a problem connecting to cassandra try the following
+### 2. There is still a problem connecting to cassandra try the following
 ```sh
 sudo apt-get purge openjdk-\* icedtea-\* icedtea6-\*
 ```
+
+### 3. When trying to run hss you get assertion error
+Look for syntax errors in hss config files
+
+### 4. When trying to run hss you get missing files
+Just create the missing folder and file with the touch command
