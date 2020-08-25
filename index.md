@@ -154,7 +154,7 @@ Exp. --mme-identity abcd.ng4T.com
 ~/openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity oai.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C 127.0.0.1
 ```
 
-- HSS Configuration (1/4) : **Prework**
+- HSS Configuration (1/5) : **Prework**
 
 Create the folders
 
@@ -175,7 +175,7 @@ Create the freeDiameter files
 cd ~/openair-cn/scripts
 
 sudo cp ../etc/acl.conf ../etc/hss_rel14_fd.conf /usr/local/etc/oai/freeDiameter
-sudo chmod 777 /usr/local/etc/oai/freeDiameter/hss_rel14.conf /usr/local/etc/oai/freeDiameter/hss_rel14.json
+sudo chmod 777 /usr/local/etc/oai/freeDiameter/acl.conf /usr/local/etc/oai/freeDiameter/hss_rel14_fd.conf
 
 sudo cp ../etc/hss_rel14.conf ../etc/hss_rel14.json /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai/hss_rel14.conf /usr/local/etc/oai/hss_rel14.json
@@ -199,7 +199,7 @@ Generate the certificates
 ../src/hss_rel14/bin/make_certs.sh hss ng4T.com /usr/local/etc/oai
 oai_hss -j /usr/local/etc/oai/hss_rel14.json --onlyloadkey
 ```
-- HSS Configuration (2/4) : File **acl.conf**
+- HSS Configuration (2/5) : File **acl.conf**
 
 Change @REALM@ with your realm 
 Exp. If your realm is "ng4T.com"
@@ -209,18 +209,56 @@ Exp. If your realm is "ng4T.com"
 ```sh
 sudo gedit /usr/local/etc/oai/freeDiameter/acl.conf
 ```
-- HSS Configuration (3/4) : File **hss_fd.conf**
+- HSS Configuration (3/5) : File **hss_rel14_fd.conf**
 
-Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
-Change **Line 7** to match your hss and realm : `Identity = "hss.ng4T.com"`
+```sh
+hostname --fqdn
+sudo gedit /usr/local/etc/oai/freeDiameter/hss_fd.conf.conf
+```
+
+Change **Line 7** to match your hss fqdn with realm : `Identity = "hss.ng4T.com"`
+
+Change **Line 11** to match your realm : `Identity = "hss.ng4T.com"`
+
+Change **Line 16-17** @PREFIX@ to match your oai install dir : `TLS_Cred = "/usr/local/etc/oai/freeDiameter/hss.cert.pem", "/usr/local/etc/oai/freeDiameter/hss.key.pem";
+TLS_CA = "/usr/local/etc/oai/freeDiameter/cacert.pem";`
+
+Change **Line 75** @PREFIX@ to match your oai install dir : `LoadExtension = "acl_wl.fdx" : "/usr/local/etc/oai/freeDiameter/acl.conf";`
+
+- HSS Configuration (4/5) : File **hss_rel14.conf**
 
 
+```sh
+sudo gedit /usr/local/etc/oai/hss_rel14.conf
+```
 
+Change **Line 24** to the cassandra server IP `cassandra_Server_IP = @cassandra_Server_IP@;`
 
+- HSS Configuration (5/5) : File **hss_rel14.json**
 
+```sh
+sudo gedit /usr/local/etc/oai/hss_rel14.json
+```
 
+Change **Line 2** @PREFIX@ to match your oai install dir : `"fdcfg": /usr/local/etc/oai/freeDiameter/hss_rel14_fd.conf",`
 
+Change **Line 3** @HSS_FQDN@ baed on hostname --fqdn command : ` "originhost": "hss.ng4T.com",`
 
+Change **Line 4** @REALM@ to match your realm : `"originrealm": "ng4T.com"`
+
+Change **Line 11** @cassandra_Server_IP@ to match your cassandra server IP : `    "casssrv": "127.0.0.1", `
+
+Change **Line 20** @OP_KEY@ to match your operator key : `    "optkey" : "1006020f0a478bf6b699f15c062e42b3",`
+
+Change **Line 22** @ROAMING_ALLOWED@ to true : `    "roamallow"  : true,`
+
+Change **Line 25** to `    "logname": "/usr/local/etc/oai/logs/hss.log",`
+
+Change **Line 29** to `    "statlogname": "/usr/local/etc/oai/logs/hss_stat.log",`
+
+Change **Line 32** to `    "auditlogname": "/usr/local/etc/oai/logs/hss_audit.log",`
+
+Change **Line 36** to `    "ossfile": "/usr/local/etc/oai/conf/oss.json"`
 
 ### MME - Installation - Configuration
 
@@ -286,10 +324,10 @@ sudo gedit /etc/hosts
 ```
 
 Modify to suit your hostname fqdn
-Exp. If your hostname fqdn is ABCD
+Exp. If your hostname fqdn is "oai"
 
 127.0.0.1	localhost
-127.0.1.1 ABCD.ng4T.com ABCD
+127.0.1.1 oai.ng4T.com oai
 127.0.33.1 hss.ng4T.com hss
 
 ### SPGW-C - Installation - Configuration
