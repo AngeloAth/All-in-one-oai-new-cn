@@ -109,7 +109,7 @@ Edit the following lines
  
 ```markdown
 - LINE 272 comment this line
-### # seeds is actually a comma-delimited list of addresses.
+# seeds is actually a comma-delimited list of addresses.
 - LINE 273
 seeds: "127.0.0.1"
 - LINE 705
@@ -357,4 +357,12 @@ sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/opena
 
 ### TROUBLESHOOTING SECTION
 
-
+# 1. If there is a problem connecting to cassandra try the following
+```markdown
+sudo gedit /etc/cassandra/cassandra-env.sh
+```
+Uncomment line 268
+`JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=127.0.0.1"`
+```markdown
+systemctl restart cassandra
+```
