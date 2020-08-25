@@ -1,7 +1,7 @@
 # Installation Manual for OAI all in one
-## Hardware
+## Hardware Setup
 
-Intel® Core™ i9-9900T
+Intel® Core™ i7-9700 @ 3.00GHz
 
 32 GB RAM
 
@@ -14,7 +14,7 @@ Open Cells Card Reader
 Open Cells Sim Cards
 
 
-## Software
+## Software Setup
 
 ### OS Installation
 Install Ubuntu [18.04](https://releases.ubuntu.com/18.04/ubuntu-18.04.5-desktop-amd64.iso) on your computer
@@ -106,12 +106,15 @@ Update the Cassandra configuration
 sudo gedit /etc/cassandra/cassandra.yaml
 ```
 Edit the following lines
-
+ 
+```markdown
+- LINE 272 comment this line
+### # seeds is actually a comma-delimited list of addresses.
 - LINE 273
 seeds: "127.0.0.1"
 - LINE 705
 endpoint_snitch: GossipingPropertyFileSnitch
-
+```
 Verify that you can access Cassandra DB
 
 ```markdown
