@@ -371,6 +371,8 @@ Change **Line 103** @HSS_FQDN@, @HSS_IP_ADDR@, @REALM@" to match your configurat
 
 ### Check the certificates for both HSS and MME
 
+If you have different hostname (oai) and realm (ng4T.com) just change them here
+
 ```sh
 cd ~/openair-cn/scripts
 ./check_hss_s6a_certificate /usr/local/etc/oai/freeDiameter/ hss.ng4T.com
@@ -390,12 +392,12 @@ Exp. If your hostname fqdn is "oai"
 ```markdown
 127.0.0.1	localhost
 127.0.1.1 oai.ng4T.com oai
-127.0.33.1 hss.ng4T.com hss
+127.0.33.1 hss.ng4T.com hss 
 ```
 
 ### SPGW-C - Installation - Configuration
 
-Install SPGW-C
+- Install SPGW-C
 
 ```markdown
 cd ~/openair-cn-cups/build/scripts
