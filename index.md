@@ -50,6 +50,7 @@ sudo make install
 sudo ldconfig
 sudo /usr/lib/uhd/utils/uhd_images_downloader.py
 ```
+## openair-cn 
 
 ### HSS - Installation - Configuration
 
@@ -369,7 +370,7 @@ hostname --fqdn
 
 Change **Line 103** @HSS_FQDN@, @HSS_IP_ADDR@, @REALM@" to match your configuration : `ConnectPeer= "hss.ng4T.com" { ConnectTo = "127.0.33.1"; No_SCTP ; No_IPv6; Prefer_TCP; No_TLS; port = 3868;  realm = "ng4T.com";};`
 
-### Check the certificates for both HSS and MME
+### Generate freeDiameter certificates for both HSS and MME
 
 If you have different hostname (oai) and realm (ng4T.com) just change them here
 
@@ -395,11 +396,13 @@ Exp. If your hostname fqdn is "oai"
 127.0.33.1 hss.ng4T.com hss 
 ```
 
+## openair-cn-cups
+
 ### SPGW-C - Installation - Configuration
 
 - Install SPGW-C
 
-```markdown
+```sh
 cd ~/openair-cn-cups/build/scripts
 sudo ./build_spgwc -I -f
 sudo ./build_spgwc -c -V -b Debug -j
@@ -407,7 +410,7 @@ sudo ./build_spgwc -c -V -b Debug -j
 
 Create configuration files of SPGW-C
 
-```markdown
+```sh
 cp ../../etc/spgw_c.conf  /usr/local/etc/oai
 ```
 
@@ -421,7 +424,7 @@ PID_DIRECTORY                  = "/var/run";
 
 Install SPGW-U
 
-```markdown
+```sh
 cd openair-cn-cups/build/scripts
 sudo ./build_spgwu -I -f
 sudo ./build_spgwu -c -V -b Debug -j
@@ -429,7 +432,7 @@ sudo ./build_spgwu -c -V -b Debug -j
 
 Create configuration files of SPGW-U
 
-```markdown
+```sh
 cp ../../etc/spgw_u.conf  /usr/local/etc/oai
 ```
 
@@ -443,7 +446,7 @@ PID_DIRECTORY                  = "/var/run";
 
 Clone the repository and change to develop branch, then proceed with installation
 
-```markdown
+```sh
 git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
 cd ~/openairinterface
 git branch
@@ -455,7 +458,7 @@ cd cmake_targets
 
 Configure eNB
 
-```markdown
+```sh
 sudo gedit ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
 ### Programming Sim Card
@@ -463,7 +466,7 @@ sudo gedit ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.
 For programming the sim cards I use [UICC v1.7](https://open-cells.com/d5138782a8739209ec5760865b1e53b0/uicc-v1.7.tgz)
 Download it, extract it then run 
 
-```markdown
+```sh
 sudo ./program_uicc --adm=28385289 --opc=8e27b6af0e692e750f32667a3b14605d --key=fec86ba6eb707ed08905757b1bb44b8f --spn=openairinterface --isdn=001011234561000 --imsi=208930000000002 --authenticate
 ```
 
@@ -471,7 +474,7 @@ Copy the hss sqn next value as we going to update in the the database.
 Lets say sqn is 37587.
 We use the user 208930000000002.
 
-```markdown
+```sh
 cqlsh
 select imsi,key,msisdn,opc,rand,sqn from vhss.users_imsi where imsi ='208930000000002';
 UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
@@ -481,7 +484,7 @@ UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
 
 In different terminals type 
 
-```markdown
+```sh
 oai_hss -j /usr/local/etc/oai/hss_rel14.json
 ~/openair-cn/scripts/run_mme --config-file /usr/local/etc/oai/mme.conf
 sudo spgwc -oc /usr/local/etc/oai/spgw_c.conf
@@ -492,15 +495,15 @@ sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/opena
 ## TROUBLESHOOTING SECTION
 
 ### 1. If there is a problem connecting to cassandra try the following
-```markdown
+```sh
 sudo gedit /etc/cassandra/cassandra-env.sh
 ```
 Uncomment line 268
 `JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=127.0.0.1"`
-```markdown
+```sh
 systemctl restart cassandra
 ```
 ### 2. If there is still a problem connecting to cassandra try the following
-```markdown
+```sh
 sudo apt-get purge openjdk-\* icedtea-\* icedtea6-\*
 ```
