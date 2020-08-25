@@ -80,7 +80,13 @@ Set the JRE version 8 as default one
 sudo service cassandra stop
 update-java-alternatives -l
 sudo update-alternatives --config java
-sudo update-java-alternatives --config java-1.8.0-openjdk-amd64
+```
+Type selection number that equals java-8-openjdk exp. here is 2 then press Enter
+
+Inline-style: 
+![alt text](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/screenshots/1.cass-java-jre8.png "jdk-8")
+
+```markdown
 sudo service cassandra start
 ```
 
@@ -355,9 +361,9 @@ sudo spgwu -oc /usr/local/etc/oai/spgw_u.conf
 sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
 
-### TROUBLESHOOTING SECTION
+## TROUBLESHOOTING SECTION
 
-# 1. If there is a problem connecting to cassandra try the following
+### 1. If there is a problem connecting to cassandra try the following
 ```markdown
 sudo gedit /etc/cassandra/cassandra-env.sh
 ```
@@ -365,4 +371,8 @@ Uncomment line 268
 `JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=127.0.0.1"`
 ```markdown
 systemctl restart cassandra
+```
+### 2. If there is still a problem connecting to cassandra try the following
+```markdown
+sudo apt-get purge openjdk-\* icedtea-\* icedtea6-\*
 ```
