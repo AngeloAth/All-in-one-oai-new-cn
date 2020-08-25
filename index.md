@@ -264,7 +264,7 @@ Change **Line 36** to `    "ossfile": "/usr/local/etc/oai/conf/oss.json"`
 
 - Install MME
 
-```markdown
+```sh
 cd ~/openair-cn/scripts
 ./build_mme --check-installed-software --force
 ./build_mme --clean
@@ -272,7 +272,7 @@ cd ~/openair-cn/scripts
 
 - Create MME configuration files
 
-```markdown
+```sh
 sudo openssl rand -out ~/.rnd 128
 cd ~/openair-cn/scripts
 cp ../etc/mme_fd.sprint.conf  /usr/local/etc/oai/freeDiameter/mme_fd.conf
@@ -280,37 +280,98 @@ cp ../etc/mme.conf  /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai/freeDiameter/mme_fd.conf /usr/local/etc/oai/mme.conf
 ```
 
-- Configuration of MME
+- Configuration of MME (1/2) : File **mme.conf**
 
-1. Change the following lines in the file /usr/local/etc/oai/mme.conf
+Change the following lines in the file /usr/local/etc/oai/mme.conf
+
+``sh
+sudo gedit /usr/local/etc/oai/mme.conf
+``
+
+Change **Line 3** @REALM@ to your realm (mine is "ng4T.com") : `    REALM                                     = "ng4T.com";`
+
+Change **Line 4** @INSTANCE@ : `    INSTANCE                                  = 1; `
+
+Change **Line 5** @PID_DIRECTORY@ : `    PID_DIRECTORY                             = "/var/run";`
+
+Change **Line 35** @PREFIX@ to match your oai install dir : `        S6A_CONF                   = "/usr/local/etc/oai/freeDiameter/mme_fd.conf";`
+
+Change **Line 36** @HSS_HOSTNAME@ from /etc/hosts : `         HSS_HOSTNAME               = "hss";`
+
+Change **Line 51** @MCC@, @MNC@, @MME_GID@, @MME_CODE : `         {MCC="208" ; MNC="93"; MME_GID="32768" ; MME_CODE="3"; } `
+
+Change **Line 57** @MCC@, @MNC@, @TAC_2@ : `        {MCC="208" ; MNC="93";  TAC = "1"; } `
+
+Delete **Lines 55** 
+
+Delete **Lines 56** to set only one TAI example below.
 
 ```markdown
-REALM = "ng4T.com";
-INSTANCE = 1; 
-PID_DIRECTORY = "/var/run";  
-S6A_CONF = "/usr/local/etc/oai/freeDiameter/mme_fd.conf";
-HSS_HOSTNAME = "hss"; 
-{MCC="208" ; MNC="93"; MME_GID="32768" ; MME_CODE="3"; } 
-{MCC="208" ; MNC="93";  TAC = "1"; }
-{ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; SGW_IPV4_ADDRESS_FOR_S11="127.0.11.2/24";},
-{ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; PEER_MME_IPV4_ADDRESS_FOR_S10="0.0.0.0/24";}
+TAI_LIST = ( 
+         {MCC="208" ; MNC="93";  TAC = "1"; }                       # YOUR TAI CONFIG HERE
+    );
 ```
 
-2. Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf  %%
+Change **Line 79** @MME_INTERFACE_NAME_FOR_S1_MME@ to loopback interface : `lo`
+
+Change **Line 80** @MME_IPV4_ADDRESS_FOR_S1_MME@ : `127.0.1.1/24`
+
+Change **Line 83** @MME_INTERFACE_NAME_FOR_S11@ to loopback interface : `lo`
+
+Change **Line 84** @MME_IPV4_ADDRESS_FOR_S11@ : `127.0.11.1/24`
+
+Change **Line 89** @MME_INTERFACE_NAME_FOR_S10@ to loopback interface : `lo`
+
+Change **Line 90** @MME_IPV4_ADDRESS_FOR_S10@ : `127.0.10.1/24`
+
+Change **Line 99** @OUTPUT@ : `CONSOLE`
+
+Change **Line 120** @TAC-LB_SGW_TEST_0@, @TAC-HB_SGW_TEST_0@, @SGW_IPV4_ADDRESS_FOR_S11_TEST_0@ : `{ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; SGW_IPV4_ADDRESS_FOR_S11="127.0.11.2/24";},`
+
+Change **Line 123** @TAC-LB_MME_1@, @TAC-HB_MME_1@, "@PEER_MME_IPV4_ADDRESS_FOR_S10_1@ : `{ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; PEER_MME_IPV4_ADDRESS_FOR_S10="0.0.0.0/24";}`
+
+Delete **Line 121** 
+
+Delete **Line 122** example below.
 
 ```markdown
-Identity = "oai.ng4T.com";
-Realm = "ng4T.com";
+WRR_LIST_SELECTION = (
+        {ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; SGW_IPV4_ADDRESS_FOR_S11="127.0.11.2/24";},
+        {ID="tac-lb01.tac-hb00.tac.epc.mnc093.mcc208.3gppnetwork.org" ; PEER_MME_IPV4_ADDRESS_FOR_S10="0.0.0.0/24";}
+    );
+```
+
+- Configuration of MME (2/2) : File **mme_fd.conf**
+
+Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf
+
+```sh
+hostname
+/usr/local/etc/oai/freeDiameter/mme_fd.conf
+```
+
+Change **Line 4** @MME_FQDN@ to hostname.realm : `oai.ng4T.com`
+
+Change **Line 5** @REALM@ to match your realm : `ng4T.com`
+
+Change **Line 8-10** @PREFIX@ : 
+```markdown
 TLS_Cred = "/usr/local/etc/oai/freeDiameter/mme.cert.pem",
            "/usr/local/etc/oai/freeDiameter/mme.key.pem";
 TLS_CA   = "/usr/local/etc/oai/freeDiameter/mme.cacert.pem";
-ListenOn = "127.0.0.11";
-ConnectPeer= "hss.ng4T.com" { ConnectTo = "127.0.0.1"; No_SCTP ; No_IPv6; Prefer_TCP; No_TLS; port = 3868;  realm = "ng4T.com";};
 ```
+
+Change **Line 53** @MME_S6A_IP_ADDR@ : `ListenOn = "127.0.0.11";`
+
+```sh
+hostname --fqdn
+```
+
+Change **Line 103** @HSS_FQDN@, @HSS_IP_ADDR@, @REALM@" to match your configuration : `ConnectPeer= "hss.ng4T.com" { ConnectTo = "127.0.33.1"; No_SCTP ; No_IPv6; Prefer_TCP; No_TLS; port = 3868;  realm = "ng4T.com";};`
 
 ### Check the certificates for both HSS and MME
 
-```markdown
+```sh
 cd ~/openair-cn/scripts
 ./check_hss_s6a_certificate /usr/local/etc/oai/freeDiameter/ hss.ng4T.com
 ./check_mme_s6a_certificate /usr/local/etc/oai/freeDiameter/ oai.ng4T.com
@@ -318,7 +379,7 @@ cd ~/openair-cn/scripts
 
 ### Configure hosts
 
-```markdown
+```sh
 hostname --fqdn
 sudo gedit /etc/hosts
 ```
@@ -326,9 +387,11 @@ sudo gedit /etc/hosts
 Modify to suit your hostname fqdn
 Exp. If your hostname fqdn is "oai"
 
+```markdown
 127.0.0.1	localhost
 127.0.1.1 oai.ng4T.com oai
 127.0.33.1 hss.ng4T.com hss
+```
 
 ### SPGW-C - Installation - Configuration
 
