@@ -22,6 +22,7 @@ Install Ubuntu [18.04](https://releases.ubuntu.com/18.04/ubuntu-18.04.5-desktop-
 ### Clone the core network's repositories
 
 ```sh
+cd ~
 git clone https://github.com/OPENAIRINTERFACE/openair-cn.git
 git clone https://github.com/OPENAIRINTERFACE/openair-cn-cups.git
 ```
@@ -42,6 +43,7 @@ git checkout develop
 ```sh
 sudo apt-get install libboost-all-dev libusb-1.0-0-dev python-mako doxygen python-docutils python-requests python3-pip cmake build-essential
 sudo pip3 install mako numpy
+cd ~
 git clone git://github.com/EttusResearch/uhd.git
 cd uhd; mkdir host/build; cd host/build
 cmake -DCMAKE_INSTALL_PREFIX=/usr ..
@@ -414,15 +416,43 @@ Create configuration files of SPGW-C
 cp ../../etc/spgw_c.conf  /usr/local/etc/oai
 ```
 
-Configure SPGW-C
+#### Configuration of SPGW-C : File **spgw_c.conf**
 
-- 1. Change the following lines in the file /usr/local/etc/oai/spgw_c.conf
-INSTANCE                       = 1;           
-PID_DIRECTORY                  = "/var/run";
+Change the following lines in the file /usr/local/etc/oai/spgw_c.conf
+
+Change **Line 23** from @INSTANCE@ to : `1`
+
+Change **Line 24** from @PID_DIRECTORY@ to : `/var/run`
+
+Change **Line 71** from @SGW_INTERFACE_NAME_FOR_S11@ to : `lo`
+
+Change **Line 72** from read to : `127.0.11.2/24`
+
+Change **Line 84** from @SGW_INTERFACE_NAME_FOR_S5_S8_CP@ read to : `lo`
+
+Change **Line 85** from read to : `127.0.13.1/24`
+
+Change **Line 99** from @INSTANCE@ to : `1`
+
+Change **Line 100** from @PID_DIRECTORY@ to : `/var/run`
+
+Change **Line 147** from @PGW_INTERFACE_NAME_FOR_S5_S8_CP@ to : `lo`
+
+Change **Line 148** from read to : `127.0.13.2/24`
+
+Change **Line 160** from @PGW_INTERFACE_NAME_FOR_SX@ to : `lo`
+
+Change **Line 161** from read to : `127.0.12.1/24`
+
+Change **Line 195** from default to the apn you setup at data_provisioning_users when configuring cassandra : `default.ng4T.com`
+
+Change **Line 203** from @DEFAULT_DNS_IPV4_ADDRESS@ to : `8.8.8.8`
+
+Change **Line 204** from @DEFAULT_DNS_SEC_IPV4_ADDRESS@ to : `8.8.4.4`
 
 ### SPGW-U - Installation - Configuration
 
-Install SPGW-U
+#### Install SPGW-U
 
 ```sh
 cd openair-cn-cups/build/scripts
@@ -436,17 +466,35 @@ Create configuration files of SPGW-U
 cp ../../etc/spgw_u.conf  /usr/local/etc/oai
 ```
 
-Configure SPGW-U
+#### Configure SPGW-U
 
-- 1. Change the following lines in the file /usr/local/etc/oai/spgw_u.conf
-INSTANCE                       = 1;           
-PID_DIRECTORY                  = "/var/run";
+Change the following lines in the file /usr/local/etc/oai/spgw_u.conf
+
+Change **Line 23** from @INSTANCE@ to : `1`
+
+Change **Line 24** from @PID_DIRECTORY@ to : `/var/run`
+
+Change **Line 59** from @SGW_INTERFACE_NAME_FOR_S1U_S12_S4_UP@ to : `lo`
+
+Change **Line 60** from read to : `127.0.14.2/24`
+
+Change **Line 72** from @SGW_INTERFACE_NAME_FOR_SX@ to : `lo`
+
+Change **Line 73** from read to : `127.0.12.2/24`
+
+Change **Line 85** from @SGW_INTERFACE_NAME_FOR_SGI@ to the interface you get access to internet, run ifconfig : `eno1`
+
+Change **Line 105** from 192.168.160.100 to : `127.0.12.1`
+
+## openairinterface5g
 
 ### eNB - Installation - Configuration
 
+#### Install eNB
 Clone the repository and change to develop branch, then proceed with installation
 
 ```sh
+cd ~
 git clone https://gitlab.eurecom.fr/oai/openairinterface5g.git
 cd ~/openairinterface
 git branch
@@ -456,12 +504,36 @@ cd cmake_targets
 ./build_oai -I --eNB -x --install-system-files -w USRP
 ```
 
-Configure eNB
+#### Configure eNB
+
+Change the following lines in the file ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 
 ```sh
 sudo gedit ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
 ```
-### Programming Sim Card
+
+Change values at **Line 18** to match your configuration : `plmn_list = ( { mcc = 208; mnc = 93; mnc_length = 2; } );`
+
+Change value at **Line 34** to : `2625000000L`
+
+Change value at **Line 34** to : `25;`
+
+Change value at **Line 43** to : `115;`
+
+Change value at **Line 175** ipv4 to : `127.0.1.1`
+
+Change value at **Line 191** ENB_INTERFACE_NAME_FOR_S1_MME to : `lo`;
+
+Change value at **Line 192** ENB_IPV4_ADDRESS_FOR_S1_MME to : `127.0.1.3/24`;
+
+Change value at **Line 193** ENB_INTERFACE_NAME_FOR_S1U to : `lo`;
+
+Change value at **Line 194** ENB_IPV4_ADDRESS_FOR_S1U to : `127.0.14.3/24`;
+
+Change value at **Line 278** parallel_config to : `PARALLEL_SINGLE_THREAD`;
+
+
+## Programming Sim Card
 
 For programming the sim cards I use [UICC v1.7](https://open-cells.com/d5138782a8739209ec5760865b1e53b0/uicc-v1.7.tgz)
 Download it, extract it then run 
@@ -480,7 +552,7 @@ select imsi,key,msisdn,opc,rand,sqn from vhss.users_imsi where imsi ='2089300000
 UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
 ```
 
-### Running HSS,MME,SPGW-C,SPGW-U and eNB
+## Running HSS,MME,SPGW-C,SPGW-U and eNB
 
 In different terminals type 
 
