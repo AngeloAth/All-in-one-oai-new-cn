@@ -8,9 +8,9 @@
 
 [MME Configure](#mme-configuration)
 
-[SPGW-C](#install-spgw-c)
+[SPGW-C](#spgw-c-installation-configuration)
 
-[SPGW-U](#install-spgw-u)
+[SPGW-U](#spgw-u-installation-configuration)
 
 [eNB](#install-enb)
 
@@ -423,7 +423,7 @@ Exp. If your hostname fqdn is "oai"
 
 ## openair-cn-cups
 
-### SPGW-C - Installation - Configuration
+### SPGW-C Installation Configuration
 
 #### Install SPGW-C
 
@@ -473,7 +473,7 @@ Change **Line 203** from @DEFAULT_DNS_IPV4_ADDRESS@ to : `8.8.8.8`
 
 Change **Line 204** from @DEFAULT_DNS_SEC_IPV4_ADDRESS@ to : `8.8.4.4`
 
-### SPGW-U - Installation - Configuration
+### SPGW-U Installation Configuration
 
 #### Install SPGW-U
 
