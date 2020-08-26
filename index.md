@@ -18,6 +18,8 @@
 
 [Run](#hss-mme-spgwc-spgwu-and-enb)
 
+[Phone Configuration](#phone-configuration)
+
 [Configuration Files](#configuration-files)
 
 [Troubleshooting](#troubleshooting)
@@ -36,6 +38,7 @@ Open Cells Card Reader
 
 Open Cells Sim Cards
 
+iPhone6s/Redmi Note8
 
 ## Software Setup
 
@@ -610,6 +613,28 @@ A the iptables command replace eno1 with the interface that you access internet 
 [spgw-c.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_c.conf.txt)
 
 [spgw-u.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_u.conf.txt)
+
+## Phone Configuration
+
+- iOS
+
+For a phone with iOS navigate to
+
+Settings > Mobile Data > Mobile Data Network > 
+
+and leave empty all apn settings
+
+- Android
+
+For a phone with android navigate
+
+Android: Settings > SIM cards & mobile networks > under SIM CARD SETTINGS choose your sim > Access Points Names > New APN
+
+Name: oai #Enter a name for the apn, it can be anything
+
+APN: default.ng4T.com #add you apn information from spgwc apn list 
+
+Then click More > Save and Select it from APNs, now turn on and off the airplane mode
 
 ## TROUBLESHOOTING 
 
