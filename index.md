@@ -1,7 +1,9 @@
 # Installation Manual for OAI all in one
 
 [HSS Install](#hss-installation-configuration)
-[HSS Configure](#hss-configuration-1/5-prework)
+
+[HSS Configure](#hss-configuration)
+
 [MME Install](#Install-MME)
 [MME Configure)(#configuration-of-mme-1/2-file-mme.conf)
 [SPGW-C](#install-spgwc)
@@ -66,7 +68,7 @@ sudo /usr/lib/uhd/utils/uhd_images_downloader.py
 ```
 ## openair-cn 
 
-### HSS - Installation - Configuration
+### HSS Installation Configuration
 
 #### Before installing Cassandra 
 
@@ -168,6 +170,7 @@ Exp. --mme-identity abcd.ng4T.com
 ```sh
 ~/openair-cn/scripts/data_provisioning_mme --id 3 --mme-identity oai.ng4T.com --realm ng4T.com --ue-reachability 1 --truncate True  --verbose True -C 127.0.0.1
 ```
+#### HSS Configuration
 
 #### HSS Configuration (1/5) : **Prework**
 
