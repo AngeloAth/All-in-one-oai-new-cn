@@ -5,14 +5,21 @@
 [HSS Configure](#hss-configuration)
 
 [MME Install](#Install-MME)
-[MME Configure)(#configuration-of-mme-1/2-file-mme.conf)
-[SPGW-C](#install-spgwc)
 
-[SPGW-U](#install-spgwc)
+[MME Configure](#mme-configuration)
+
+[SPGW-C](#install-spgw-c)
+
+[SPGW-U](#install-spgw-u)
+
 [eNB](#install-enb)
+
 [Programming Sim](#programming-sim-card)
+
 [Run](#hss-mme-spgwc-spgwu-and-enb)
+
 [Troubleshooting](#troubleshooting)
+
 ## Hardware Setup
 
 Intel® Core™ i7-9700 @ 3.00GHz
@@ -297,8 +304,9 @@ cp ../etc/mme_fd.sprint.conf  /usr/local/etc/oai/freeDiameter/mme_fd.conf
 cp ../etc/mme.conf  /usr/local/etc/oai
 sudo chmod 777 /usr/local/etc/oai/freeDiameter/mme_fd.conf /usr/local/etc/oai/mme.conf
 ```
+#### MME Configuration
 
-#### Configuration of MME (1/2) : File **mme.conf**
+#### MME Configuration (1/2) : File **mme.conf**
 
 Change the following lines in the file /usr/local/etc/oai/mme.conf
 
@@ -359,7 +367,7 @@ WRR_LIST_SELECTION = (
     );
 ```
 
-#### Configuration of MME (2/2) : File **mme_fd.conf**
+#### MME Configuration (2/2) : File **mme_fd.conf**
 
 Change the following lines in the file /usr/local/etc/oai/freeDiameter/mme_fd.conf
 
