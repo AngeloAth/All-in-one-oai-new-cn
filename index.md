@@ -652,6 +652,7 @@ systemctl restart cassandra
 ```sh
 sudo apt-get purge openjdk-\* icedtea-\* icedtea6-\*
 ```
+Install it from the scratch.
 
 ### 3. When trying to run hss you get assertion error
 Look for syntax errors in hss config files
