@@ -18,6 +18,8 @@
 
 [Run](#hss-mme-spgwc-spgwu-and-enb)
 
+[Configuration Files](#configuration-files)
+
 [Troubleshooting](#troubleshooting)
 
 ## Hardware Setup
@@ -588,6 +590,9 @@ sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/opena
 sudo iptables -A FORWARD -i eno1 -o pdn -j ACCEPT 
 ```
 A the iptables command replace eno1 with the interface that you access internet from ifconfig
+
+## Configuration Files
+
 
 ## TROUBLESHOOTING 
 
