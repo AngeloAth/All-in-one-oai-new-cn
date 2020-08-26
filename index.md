@@ -618,23 +618,23 @@ Then click More > Save and Select it from APNs, now turn on and off the airplane
 
 ## Configuration Files
 
--[acl.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/acl.conf.txt)
+* [acl.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/acl.conf.txt)
 
--[cassandra.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/cassandra.conf.txt)
+* [cassandra.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/cassandra.conf.txt)
 
--[hss_rel14_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel_14_fd.conf.txt)
+* [hss_rel14_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel_14_fd.conf.txt)
 
--[hss_rel14.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.conf.txt)
+* [hss_rel14.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.conf.txt)
 
--[hss_rel14.json](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.json.txt)
+* [hss_rel14.json](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.json.txt)
 
--[mme.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme.conf.txt)
+* [mme.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme.conf.txt)
 
--[mme_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme_fd.conf.txt)
+* [mme_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme_fd.conf.txt)
 
--[spgw-c.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_c.conf.txt)
+* [spgw-c.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_c.conf.txt)
 
--[spgw-u.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_u.conf.txt)
+* [spgw-u.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_u.conf.txt)
 
 
 ## TROUBLESHOOTING 
