@@ -272,23 +272,23 @@ sudo gedit /usr/local/etc/oai/hss_rel14.json
 
 Change **Line 2** @PREFIX@ to match your oai install dir : `"fdcfg": /usr/local/etc/oai/freeDiameter/hss_rel14_fd.conf",`
 
-Change **Line 3** @HSS_FQDN@ baed on hostname --fqdn command : ` "originhost": "hss.ng4T.com",`
+Change **Line 3** @HSS_FQDN@ baed on hostname --fqdn command : `"originhost": "hss.ng4T.com",`
 
 Change **Line 4** @REALM@ to match your realm : `"originrealm": "ng4T.com"`
 
-Change **Line 11** @cassandra_Server_IP@ to match your cassandra server IP : `    "casssrv": "127.0.0.1", `
+Change **Line 11** @cassandra_Server_IP@ to match your cassandra server IP : `"casssrv": "127.0.0.1", `
 
-Change **Line 20** @OP_KEY@ to match your operator key : `    "optkey" : "1006020f0a478bf6b699f15c062e42b3",`
+Change **Line 20** @OP_KEY@ to match your operator key : `"optkey" : "1006020f0a478bf6b699f15c062e42b3",`
 
-Change **Line 22** @ROAMING_ALLOWED@ to true : `    "roamallow"  : true,`
+Change **Line 22** @ROAMING_ALLOWED@ to true : `"roamallow"  : true,`
 
-Change **Line 25** to `    "logname": "/usr/local/etc/oai/logs/hss.log",`
+Change **Line 25** to `"logname": "/usr/local/etc/oai/logs/hss.log",`
 
-Change **Line 29** to `    "statlogname": "/usr/local/etc/oai/logs/hss_stat.log",`
+Change **Line 29** to `"statlogname": "/usr/local/etc/oai/logs/hss_stat.log",`
 
-Change **Line 32** to `    "auditlogname": "/usr/local/etc/oai/logs/hss_audit.log",`
+Change **Line 32** to `"auditlogname": "/usr/local/etc/oai/logs/hss_audit.log",`
 
-Change **Line 36** to `    "ossfile": "/usr/local/etc/oai/conf/oss.json"`
+Change **Line 36** to `"ossfile": "/usr/local/etc/oai/conf/oss.json"`
 
 ### MME - Installation - Configuration
 
@@ -319,19 +319,19 @@ Change the following lines in the file /usr/local/etc/oai/mme.conf
 sudo gedit /usr/local/etc/oai/mme.conf
 ``
 
-Change **Line 3** @REALM@ to your realm (mine is "ng4T.com") : `    REALM                                     = "ng4T.com";`
+Change **Line 3** @REALM@ to your realm (mine is "ng4T.com") : `REALM                                     = "ng4T.com";`
 
-Change **Line 4** @INSTANCE@ : `    INSTANCE                                  = 1; `
+Change **Line 4** @INSTANCE@ : `INSTANCE                                  = 1; `
 
-Change **Line 5** @PID_DIRECTORY@ : `    PID_DIRECTORY                             = "/var/run";`
+Change **Line 5** @PID_DIRECTORY@ : `PID_DIRECTORY                             = "/var/run";`
 
-Change **Line 35** @PREFIX@ to match your oai install dir : `        S6A_CONF                   = "/usr/local/etc/oai/freeDiameter/mme_fd.conf";`
+Change **Line 35** @PREFIX@ to match your oai install dir : `S6A_CONF                   = "/usr/local/etc/oai/freeDiameter/mme_fd.conf";`
 
-Change **Line 36** @HSS_HOSTNAME@ from /etc/hosts : `         HSS_HOSTNAME               = "hss";`
+Change **Line 36** @HSS_HOSTNAME@ from /etc/hosts : `HSS_HOSTNAME               = "hss";`
 
-Change **Line 51** @MCC@, @MNC@, @MME_GID@, @MME_CODE : `         {MCC="208" ; MNC="93"; MME_GID="32768" ; MME_CODE="3"; } `
+Change **Line 51** @MCC@, @MNC@, @MME_GID@, @MME_CODE : `{MCC="208" ; MNC="93"; MME_GID="32768" ; MME_CODE="3"; } `
 
-Change **Line 57** @MCC@, @MNC@, @TAC_2@ : `        {MCC="208" ; MNC="93";  TAC = "1"; } `
+Change **Line 57** @MCC@, @MNC@, @TAC_2@ : `{MCC="208" ; MNC="93";  TAC = "1"; } `
 
 Delete **Lines 55** 
 
