@@ -16,9 +16,9 @@
 
 [Programming Sim](#programming-sim-card)
 
-[Run](#hss-mme-spgwc-spgwu-and-enb)
-
 [Phone Configuration](#phone-configuration)
+
+[Run](#hss-mme-spgwc-spgwu-and-enb)
 
 [Configuration Files](#configuration-files)
 
@@ -594,26 +594,6 @@ sudo iptables -A FORWARD -i eno1 -o pdn -j ACCEPT
 ```
 A the iptables command replace eno1 with the interface that you access internet from ifconfig
 
-## Configuration Files
-
--[acl.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/acl.conf.txt)
-
--[cassandra.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/cassandra.conf.txt)
-
--[hss_rel14_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel_14_fd.conf.txt)
-
--[hss_rel14.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.conf.txt)
-
--[hss_rel14.json](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.json.txt)
-
--[mme.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme.conf.txt)
-
--[mme_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme_fd.conf.txt)
-
--[spgw-c.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_c.conf.txt)
-
--[spgw-u.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_u.conf.txt)
-
 ## Phone Configuration
 
 - iOS
@@ -635,6 +615,27 @@ Name: oai #Enter a name for the apn, it can be anything
 APN: default.ng4T.com #add you apn information from spgwc apn list 
 
 Then click More > Save and Select it from APNs, now turn on and off the airplane mode
+
+## Configuration Files
+
+-[acl.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/acl.conf.txt)
+
+-[cassandra.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/cassandra.conf.txt)
+
+-[hss_rel14_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel_14_fd.conf.txt)
+
+-[hss_rel14.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.conf.txt)
+
+-[hss_rel14.json](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/hss_rel14.json.txt)
+
+-[mme.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme.conf.txt)
+
+-[mme_fd.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/mme_fd.conf.txt)
+
+-[spgw-c.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_c.conf.txt)
+
+-[spgw-u.conf](https://raw.githubusercontent.com/angelo-ath/oai/gh-pages/conf_files/spgw_u.conf.txt)
+
 
 ## TROUBLESHOOTING 
 
