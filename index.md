@@ -590,10 +590,14 @@ oai_hss -j /usr/local/etc/oai/hss_rel14.json
 sudo spgwc -oc /usr/local/etc/oai/spgw_c.conf
 sudo spgwu -oc /usr/local/etc/oai/spgw_u.conf
 sudo ~/openairinterface5g/cmake_targets/ran_build/build/lte-softmodem -O ~/openairinterface5g/targets/PROJECTS/GENERIC-LTE-EPC/CONF/enb.band7.tm1.50PRB.usrpb210.conf
-sudo iptables -A FORWARD -i eno1 -o pdn -j ACCEPT 
 ```
-A the iptables command replace eno1 with the interface that you access internet from ifconfig
+At the iptables command replace eno1 with the interface that you access internet from ifconfig
 
+```sh
+sudo iptables -A FORWARD -i eno1 -o pdn -j ACCEPT 
+sudo ethtool -K pdn tx-checksum-ip-generic off gro on gso on tso on
+sudo ethtool -K eno1 gro on gso on tso on
+```
 ## Phone Configuration
 
 - iOS
