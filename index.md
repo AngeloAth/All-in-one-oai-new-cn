@@ -563,7 +563,7 @@ Change value at **Line 278** parallel_config to : `PARALLEL_SINGLE_THREAD`;
 
 ## Programming Sim Card
 
-For programming the sim cards I use [UICC v1.7](https://open-cells.com/d5138782a8739209ec5760865b1e53b0/uicc-v1.7.tgz)
+For programming the sim cards I use [UICC v1.7](https://open-cells.com/d5138782a8739209ec5760865b1e53b0/uicc-v1.7.tgz) and Open Cells SIM Reader
 Download it, extract it then run 
 
 ```sh
