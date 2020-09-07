@@ -18,7 +18,7 @@
 
 [Phone Configuration](#phone-configuration)
 
-[Run](#hss-mme-spgw-c-spgw-u-enb)
+[Run](#running-hss-mme-spgw-c-spgw-u-enb)
 
 [Configuration Files](#configuration-files)
 
