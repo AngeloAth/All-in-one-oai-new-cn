@@ -18,7 +18,7 @@
 
 [Phone Configuration](#phone-configuration)
 
-[Run](#hss-mme-spgwc-spgwu-and-enb)
+[Run](#hss-mme-spgw-c-spgw-u-enb)
 
 [Configuration Files](#configuration-files)
 
@@ -580,7 +580,7 @@ select imsi,key,msisdn,opc,rand,sqn from vhss.users_imsi where imsi ='2089300000
 UPDATE vhss.users_imsi SET sqn=37527 WHERE imsi='208930000000002';
 ```
 
-## Running HSS, MME, SPGW-C, SPGW-U and eNB
+## Running HSS MME SPGW-C SPGW-U eNB
 
 In different terminals type 
 
